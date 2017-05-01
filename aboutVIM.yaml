@@ -1,0 +1,211 @@
+---
+.vimrc: |
+        [:set] Display all modified values
+        [:set all] Display all current values
+        [:set shell=/bin/bash] set shell-environment
+        [:set enc=utf8] Set content-encryption for UTF8
+        [:set nu] Display Line Number
+        [:set relativenumber] Display relative line-number
+        [:set ai] Auto Indent
+        [:set cursorline] the line current cursor inside will be highlighted
+        [:set cursorcolumn] the column current cursor inside will be highlighted
+        [:set bg={COLOR}] Specify background color
+        [:set tabstop={NUMBER}] Specify how many SPACEs will be put for each TAB
+        [:set expandtab] Entering TAB will be replaced by specified number of SPACEs.
+        [:set shiftwidth={NUMBER}] Specify how many SPACEs will be used for Auto-Indent
+        [:set mouse=[a/n/v]] Enable "Select via Mouse Cursor" in Specified Modes, "a" for All, and "" for none
+        [:set hls] Remark Keywords
+        [:set autochdir] Enable auto-change-directory
+        [:set autoread] To auto-load unchanged files when the source was changed
+        [:set ic] Search will be case-insensitive
+        [:set wrap/nowrap] Enable/Disable wrap when String is too long 
+        [:set noeb] Disable beep sound
+        [:set visualbell] Using Cursor-Blink to replace Beep
+        [:set ruler] Display document info in bottom-right corner, including row, column, etc
+        [:set backspace=2] Enable BACKSPACE in INSERT-MODE
+        [:set formatoptions+=r] Auto-Comment
+        [:set history=100] Specify how many Commands will be preserved
+        [:set incsearch] Display search result before input is complete
+        [filetype indent on] Enabled indent style which will according to Filetype
+        [:inoremap] Specify Key-Mapping, could also used for simple-automation like below.
+            ":inoremap ( ()<Esc>i" Insert '(' will auto attach right-brace then enter Insert-Mode again
+            ':inoremap " ""<Esc>i'
+            ":inoremap ' ''<Esc>i"
+            ":inoremap [ []<Esc>i"
+            ":inoremap {<CR> {<CR>}<Esc>ko" <CR> means ENTER
+        [:hi] is short for "Highlight", can attach KEYs below for further config
+            "LineNr" Color of Line-Number
+            "CursorLineNr" 
+            "CursorLineCr"
+            "cterm" Font config for Color-Terminal Environment, other Environments could be "term" or "gui". Usually the value would be "bold" for bold fonts.
+            "ctermfg" Frontground color of Color-Terminal
+            "ctermbg" Background color of Color-Terminal 
+            Supported colors in Color-Terminal could be
+                "Black", "DarkBlue", "DarkGreen", "DarkCyan", "DarkRed", "DarkMagenta",
+                "Brown", "DarkYellow", "LightGray", "LightGrey", "Gray", "Grey", 
+                "DarkGray", "DarkGrey", "Blue", "LightBlue", "Green", "LightGreen", 
+                "Cyan", "LightCyan", "Red", "LightRed", "Magenta", "LightMagenta", 
+                "Yellow", "LightYellow", "White"
+Syntax: |
+        set your "omnifunc" properly, then use Omni-Completion.
+        Automatically enable auto-complete for certain file-type, e.g
+        "autocmd FileType javascript set omnifunc=javascriptcomplete"
+AutoComplete: |
+        [Ctrl+x] to trigger auto-complete feature, then use another key to specify what kind of completion to be used.
+        [Ctrl+l] Line-Completion. config "complete" to determine the source, "completeopt" for how the completion occurs.
+        [How to config "complete"] the value is a ","-separated-string. Possible tokens are 
+                .    Scan for current Buffer
+                w    Scan for other Windows
+                b    Scan for listed-Buffers
+                u    Scan for unmounted-Buffers
+                U    Scan for unlisted-Buffers
+                k    Scan Dictionary-Files specified by "dictionary" option
+                k{dict}   Scan {dict} file as Dictionary
+                kspell    Use current spell-checking as completion (?)
+                s    Scan Thesaurus specified by "thesaurus" option
+                s{tsr}    Scan {tsr} file as Thesaurus
+                i    Scan for current File & imported file
+                d    Scan for current file, imported file, and do Definition-completion
+                t    Use Tag-Completion
+        [Ctrl+n/p] Keyword-Completion. config "iskeyword" to define Keywords. "n" for "Next-Matching-Word", "p" for "Previous-Matching-Word".
+       [Ctrl+k] Dictionary-Completion. config "dictionary" to add Dictionary as completion-source. Like "dictionary+=/path/to/you_dic"
+       [Ctrl+t] Thesaurus-Completion. 
+       [Ctrl+i] Import-File-Completion. config "path" to add completion-source.
+       [Ctrl+]] Tag-Completion. config "ctags" for tag-files as completion-source.
+       [Ctrl+f] Filename-Completion. config "isfname" to define file-name pattern.
+       [Ctrl+d] Definition-Completion. Search definitions inside of current file & imported files as completion-source.
+       [Ctrl+v] Vim-command-Completion. Useful when writing VIM script.
+       [Ctrl+u] User-defined-Completion. config "completefunc" to specify completion-function of your own.
+       [Ctrl+o] Omni-Completion. Usually worked for certain file-type. config "omnifunc" to specify completion-function. Check compl-omni-filetypes for supported file-type.
+       [s] Spelling-suggestions-Completion.
+       
+       To enable 3rd-Party library auto-complete you will need some help from plugins.
+       "Valloric/YouCompleteMe" as code-completion-engine
+       "ternjs/tern_for_vim" as code-analysis-engine
+ContentFolding: |
+        [:set foldenable] Enable folding
+                [z[c/o/a]] Close/Open/Toggle when "Fold" is enabled, use 'toggle' is the easier way. Also, when using uppercase command, it will effect all levels of folding.
+                [z[r/m]] Reduce/More folding to all existing fold of current buffer. Uppercase command will effect all levels of folding.
+        [:set foldmethod={METHOD}] Set Folding method, possible methods are
+                MANUAL: fold only when user specified
+                INDENT: Fold according to indent
+                SYNTAX: Fold according to file type, most useful when coding
+                EXPR: Most powerful mode
+                MARKER: Fold according to markers
+                DIFF: Does not recommended to use.
+        [:set foldcolumn=1]
+        [:set foldlevel=5]
+Split: |
+        [Ctrl+w] ready to operate current Split
+                [h/j/k/l/w] Moving between splits, "w" for Next
+                [c/q] Close current Split, "q" for "Exit VIM when its the last Split"
+                [s/v] Split current Split, "s" to split horizontally, "v" to split vertically
+                [+/-/=] Adjust the height. "=" for equalizing heights of all Splits
+                [>/<] Adjust the width
+        [:[sp/vsp] filename] Open target file, put into new Split. "vsp" for creating a new Vertical Split
+        * if you want to split multiple files after entering VIM, try 
+          "vim -[O/o]n file1 file2" where "n" is a number, "O" means split vertically, "o" means split horizontally
+BrowseDirectory: |
+        [:cd path] Change the path of current directory
+        [:pwd] Check the path of current directory
+        [:[e/E]] To open a new file, specify filename afterward. "E" for Entering file manager
+        [:Ve(!)] Split vertically, browse in the Left side. To browse in the Right use "!"
+        [:He(i)] Split horizontally, browse in the Bottom. To browse in the Up use "!"
+Tabs: |
+        [:Te] Creating a single Tab
+        [:tabs] Check for Tab status
+        [:bufdo tab split] Buffers to Tabs
+        [gt] Going to next Tab
+        [gT] Going to previous Tab
+        [{i}gt] {i} is a number, going to the ith Tab
+        * if you want to open multiple Tabs when entering VIM, try "vim -p file1 file2"
+Buffer: |
+        [:ls] Check for Buffers
+        [:buffer {i}] Switch to target Buffer
+        [:bnext] Switch to Next Buffer, or you can use ":bn"
+        [:bprevious] Switch to Previous Buffer, or you can use ":bp"
+        [:blast] Switch to Last Buffer, or you can use ":bl"
+        [:bfirst] Switch to First Buffer, or you can use "bf"
+Scrolling: |
+        [gg] Scroll to the Top of the file
+        [G] Scroll to the Bottom of the file
+        [Ctrl+F] Scroll to next page. F for "Forward"
+        [Ctrl+B] Scroll to previous page. B for "Back"
+        [g{line]}] Go to target line
+Bookmark: |
+        [:marks] List all bookmarks
+        [m{x}] Bookmark current line, and tagged as "x". It will be Global when 'x' is Uppercased
+        [\'{x}] Jump to tagged Bookmark
+MoveCursor: |
+        [w/b] Move between Words. Try Uppercase to move between words except special characters.
+        [%] Move between paired Brackets
+        [0/$] Move to the first/last character of this line.
+        [^/g_] Move to the first/last word of this line.
+        [[{/]}] Move to the head/tail of current Block
+        [{/}] Move to the previous/next paragraph
+        [H/M/L] Move to the Top/Middle/Last of the Window
+        [*/#/gd] Find next/previous/first occurence of current focused word
+Search: |
+        [/{string}] search for target String
+        [n/N] Go to Next/Previous search result
+        [:grep] Usage just like regular "GREP", can be configed by "grepprg"
+        [:vimgrep {PATTERN} {FILES}] Using Inner Integrapted GREP
+Register: |
+        It is an extra buffer for storing content, you can specify which register you are going to use before yanking/deleting. To specify a register, '"' is necessary in the first step, then followed a single character as the name of register, like '"q' or '"^'. After specifying the register, you can do your operation directly like '"qyy' means 'yank this line and put it into register q'. 
+        Generally the name of register is Lowercase, then the content is replaced when you put something else into it. But you can use Uppercase one to append new content after the origin.
+        ['"+'] the register of SYSTEM CLIPBOARD. (Use '*' in Windows)
+        ['"*'] the register of MOUSE-HIGHLIGHT
+        ['"0'] the register only for "Yanked string"
+        ['"1'] the register only for "Deleted string"
+        ['":'] the register for "the last command"
+        ['"/'] the register for "the last Search command"
+        ['"_'] the Blackhole register, try 'noremap x "_x' to put deleted single character into blackhole without updating register 1.
+        [:reg] show all defined registers. There are several special registers exist for certain purposes like "System Clipboard" or "Mouse hightlight", and yanked or deleted string were all stored in register. Macros are stored in Registers too.
+Editing: |
+        [>> | << | =] Indent
+        [J] Combine with next line
+        [D] Delete from the current cursor to the end of this line
+        [u/Ctrl+R] Undo/Redo
+        [y] Yank
+        [d] Delete
+        [:{begin,end}s/{target}/{replacement}/{mode}] Substitute, equals to "Search and Relace", search for target "Pattern", and replaced by replacement.
+            you can specify effect range by adding "{begin,end}" or you will only effect current line. Using "%" to effect all lines.
+            "mode" is a string combined by several parameters. Parameters are 
+                "g" for all occurences
+                "i" for case-insensitive
+                "I" for case-sensitive
+                "c" for prompting confirmation before proceeding
+ReplaceMode: |
+        [R] Enter Replace Mode, but this mode is not very generally used.
+VisualMode: |
+        [v] Enter Visual Mode
+        [V] Visual Line Mode
+        [Ctrl+V] Visual Block Mode
+Command: |
+        [.] Execute last Command again
+        [{N}{Command}] Execute Command N times
+        [:r] Read, the out of the following command would be the input
+        [:!] execute Shell command, you can attach Command afterward
+        [:retab] Transfering all existing TABs into SPACEs
+        [:source $MYVIMRC] to load .vimrc again, it is helpful when changing .vimrc
+Advance: |
+        [{StartCursor}+{Command}+{EndCursor}]
+Macro: |
+        [q] Enter Macro Recording Mode. Need to input name of the Macro.
+            When recording is complete, press ESC then "q" again to exit
+        [@{Macro}] Run recorded Macro
+Quickfix: |
+        [:make] Compile
+        [:set makeprg=PATH] Specify the command used by ":make"
+        [:copen] Open Quickfix Window
+        [:cclose] Close Quickfix Window
+        [:cnext] Switch to next error
+        [:cprev] Switch to previous error
+Plugins: 
+        You might need a Plugin-Manager like [Vundle] or [vim-plug]. 
+        try ":PlugInstall" to install Plugin-Manager
+
+        Other plugins might helpful for coding like
+        [YouCompleteMe]
+        [UltiSnips]
+...
