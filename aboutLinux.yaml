@@ -1,0 +1,89 @@
+AccountManagement: |
+    CHOWN: ???
+    CHMOD: ???
+    CHGRP: ???j
+FileSystemHierarchy: 
+PackageManagement: 
+TextProcessing: |
+    SORT: ?
+    TAIL: ?
+    MULTITAIL: ?
+    CUT: ?
+    GREP: ?
+    ACK: ?
+    WC: ?
+    UNIQ: ?
+    AWK: see http://coolshell.cn/articles/9070.html
+    SED: see http://coolshell.cn/articles/9104.html
+Process: |
+    PS: |
+        Process Snapshot
+    PSTREE: |
+        ???
+    JOBS: |
+        show all jobs
+    KILL: 把Process殺掉
+    PGREP: |
+    PKILL: |
+        ???
+    Life-Cycle: |
+        "Ctrl-Z": ???
+        "Ctrl-C": SIGINT
+        "Ctrl-\\": SIGQUIT
+    Process-Switching: |
+        Running-in-Background: attach "&" in the tail of whole command
+        FG: Foreground
+        BG: Background
+    RunProcessAsService: |
+        SCREEN: |
+            ???
+        TMUX: |
+            ???
+    Automation: |
+        XARGS: ?
+        PARALLEL: ?
+FirewallConfiguration: 
+ResourceMonitoring: |
+    Important resources including Memory, CPU loading, Port binding, and Network traffic.
+    Disk: |
+        DU: |
+            Disk-Utilization
+        DF: ???
+    Network: |
+        NETSTAT: ?
+        MTR: ?
+        SLURM: ?
+    Performance: |
+        DSTAT: ?
+        IOSTAT: ?
+        HTOP: ?
+        IOTOP: ?
+        IFTOP: ?
+        IPTRAF: ?
+        FREE: ?
+        VMSTAT: ?
+        STRACE: ?
+        LTRACE: ?
+        GDB: ?
+        SAR: ?
+        DMESG: ?
+Restriction: |
+    應該把相關的命令附加在Resource後面，命令如下 |
+    ulimit, lsof
+ExternalAccess: |
+    SSH(with ssh-agent&ssh-add): ?
+    SCP: ?
+    CURL: ?
+    SOCAT: ?
+    NETPIPES: ?
+    RSYNC: ?
+    SOCAT: ?
+Specific-Purpose-Use-Cases: |
+    列出當前目錄裡最大的10個檔案 -> du -s * | sort -n | tail
+    列出前十個最耗資源的Process -> ps aux | sort -nk+4 | tail
+    列出本機Process監聽的Port -> netstat -tlnp
+    查看外網的IP -> curl ifconfig.me
+編輯遠端文件 -> vim scp://username@host//path/to/somefile
+Applications: |
+    TastWarrior: ?
+KernelCompilation: 

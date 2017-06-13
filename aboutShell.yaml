@@ -1,0 +1,50 @@
+Shell: |
+    Cursor: |
+        移動到開頭: Ctrl+u
+        移動到尾端: Ctrl+e
+        刪除目前位置之前所有字元: Ctrl+u
+        刪除目前位置之後所有字元: Ctrl+k
+    Variable: |
+        定義變數: Variable_Name = VALUE
+        使用變數: $Variable_Name或${Variable_Name}。基本上有括號的版本適用性比較高
+        刪除變數: unset Variable_Name
+        有條件地定義變數: |
+            基本上會寫作Variable_Name=${Variable_Name[OPERATORS]Value}，這裡一定要用括號包起來條件才會生效；
+            OPERATORS有以下幾種 |
+                "-": isUndefined
+                ":": isEmptyString
+                "+": ???
+                "=": ???
+                "?": ???
+        在定義時做計算: |
+            也是必需要用括號包起來，計算要定義在括號中，基本的加減乘除一定可以的。
+            現在要介紹比較進階的用法如下 |
+            刪除Pattern: |
+                除了Pattern的定義之外，還需要指定刪除的模式 |
+                    從前面往後刪用"#"，刪除shortest matched pattern；若用兩個'#'則是會刪除longest matched pattern
+                    從後面往前刪用'%'，刪除shortest matched pattern；若用兩個'%'則是會刪除longest matched pattern
+                Pattern要接在模式的後面，如"#/*:"
+            取代舊字串: |
+                Operator為"/"，兩個變數"ReplacementTarget"和"NewValue"要用格式"/ReplacementTarget/NewValue"連接以生效；
+                如果用兩個"/"則是會將字串中所有出現的ReplacementTarget取代成NewValue
+        定義區域變數: declare -ai Variable_Name=VALUE。參數中的"a"表示"Array"、"i"表示"Integer"(若不指定則是String)
+        定義環境變數: export Variable_Name
+        將指令的輸出做為變數: 使用$(Command)。這裡用的不是Curly Brackets而是Round Brackets。也可以用`Command`
+        預先定義好的特殊變數: |
+            "$$": 目前Shell的PID
+            "!!": 前一次執行的Command
+            "$?": 前一次執行Command的輸出
+            "!$": 前一次執行Command的最後一個Token
+            "-": 前一個資料夾
+            "~{UserName}": 家目錄；可以傳入UserName代表該User的家目錄
+    Commands: |
+        "Ctrl+'.'": 前一次執行所帶的Arguments
+        "^OldValue^NewValue": 將前一次執行的Command中出現的"OldValue"取代成"NewValue"
+        "type_{command}": 確認command的型態。看是external還是shell內建的
+        "Ctrl+'.'": 前一次執行所帶的Arguments
+        "^OldValue^NewValue": 將前一次執行的Command中出現的"OldValue"取代成"NewValue"
+        "type_{command}": 確認command的型態。看是external還是shell內建的
+    History: |
+        "history": ???
+        "last": ???
+ShellScript: 
