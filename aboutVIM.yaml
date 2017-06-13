@@ -166,8 +166,9 @@ Editing: |
         [J] Combine with next line
         [D] Delete from the current cursor to the end of this line
         [u/Ctrl+R] Undo/Redo
-        [y] Yank
+        [y] Yank; Try "yy" to duplicate current line, or "ye" to copy from the current position to the end of this word
         [d] Delete
+        [p] Paste after current cursor, try "P" to paste before current cursor
         [:{begin,end}s/{target}/{replacement}/{mode}] Substitute, equals to "Search and Relace", search for target "Pattern", and replaced by replacement.
             you can specify effect range by adding "{begin,end}" or you will only effect current line. Using "%" to effect all lines.
             "mode" is a string combined by several parameters. Parameters are 
@@ -181,6 +182,7 @@ VisualMode: |
         [v] Enter Visual Mode
         [V] Visual Line Mode
         [Ctrl+V] Visual Block Mode
+        after selection, you can perform "J" to concate all lines, "< | > | =" to indent
 Command: |
         [.] Execute last Command again
         [{N}{Command}] Execute Command N times
@@ -201,11 +203,33 @@ Quickfix: |
         [:cclose] Close Quickfix Window
         [:cnext] Switch to next error
         [:cprev] Switch to previous error
-Plugins: 
+Plugins: |
+    Here are recommended plugins for your coding
+    Plugin-Manager: |
         You might need a Plugin-Manager like [Vundle] or [vim-plug]. 
         try ":PlugInstall" to install Plugin-Manager
+    Theme: |
+        I like dark themes, try "Lokaltog/vim-distinguished"
+    Syntax: |
+        Additional to VIM build-in syntax-highlighting, maybe we can use something different like
+        "jelera/vim-javascript-syntax"
+    Indent: |
+        Additional to VIM build-in indentation, you might need some help from language-specific plugins
+        "pangloss/vim-javascript"
+        "nathanaelkane/vim-indent-guides"
+    Adding-Counterpart-of-Paired-Bracket: |
+        try "RaimondidelimitMate"
+        Here is a hint, you might need to bind a special key to move your cursor to the end of the line.
+    Linting: |
+        try "scrooloose/syntastic", this is just a bridge for external linter.
+        so you might need JSHint installed via NPM("npm install -g jshint") to lint your Javascirpt code.
+    Code-Completion: |
+        try "Valloric/YouCompleteMe" combine with "marijnh/tern_for_vim"
+        both of them need extra configuration to get them work properly, 
+        see "http://www.theendian.com/blog/javascript-autocomplete-in-vim-for-jquery" for a brief introduction.
 
-        Other plugins might helpful for coding like
-        [YouCompleteMe]
-        [UltiSnips]
+        after all these, you can get "GoToDeclaration", "GoToDefinition", "GoToDefinitionElseDeclaration" YCM subcommands
+        to let you jump to certain part of your code.
+    Snippits: |
+        try "SirVer/ultisnips"
 ...
