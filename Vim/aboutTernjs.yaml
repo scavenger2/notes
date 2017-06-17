@@ -1,1 +1,136 @@
 # see http://ternjs.net
+
+Supported-Command-Flags: |
+    Do not forget to add "--" before the flag when using.
+        ? "port <number>": Specify a port to listen on.
+        ? "host <host>": Specify a host to listen on. Default is "127.0.0.1"
+        ? "persistent": By default, the server will shut itself down after five minutes of inactivity. Turn this behavior off
+        ? "ignore-stdin": ??
+        ? "verbose": to spit out information about the requests, responses, and any errors raised. Useful for debugging
+        ? "no-port-file": ??
+JSON-Protocol: |
+    Communicate with a Tern server by making POST requests to the server's port with a JSON document in the body.
+    The JSON document has three optional fields listed below 
+        ? QUERY: |
+            Describes the kind of information you are requesting. 
+            It is an object, here are the queries that a Tern server understands by default 
+                Completions: |
+                    Asks the server for a set of completions at the given point. Accepted fields are
+                    [Mandatory]
+                        file, end: Specify the location to complete at.
+                    [Optional]
+                        types: Whether to include the types of the completions in the result data. Default false.
+                        depths: Whether to include the distance between the completions and the origin position. Default false.
+                        docs, urls, origins: Whether to include documentation strings, urls, and origin files. Default false.
+                        filter: Only completions that match the current word at the given point. Default true.
+                        caseInsensitive: compare between the current word and potential completions. Default false.
+                        guess: Default true.
+                        sort: Default true.
+                        expandWordForward: Default true.
+                        omitObjectPrototype: Default true.
+                        includeKeywords: Default false.
+                        inLiteral: Default true.
+                Type: |
+                    Query the type of something.
+                    [Mandatory]
+                        file, end: Specify the expression we want the type of.
+                    [Optional]
+                        start: ??
+                        preferFunction: Default false.
+                        depth: Default zero.
+                    The returned object will have the following properties
+                        type: A description of the type of the value
+                        guess: Whether the given type was guessed
+                        name: The name associated
+                        exprName: ??
+                        doc, url, origin: ??
+                Definition: |
+                Documentation: |
+                Refs: |
+                Rename: |
+                Properties: |
+                Files: |
+        ? FILES: contains an array of file specifications 
+        ? TIMEOUT: contain a number, which is interpreted as the maximum amount of milliseconds to work
+Programming-Interface: |
+    The base server is implemnted in lib/tern.js which exposes a Server constructor to create a server.
+    The constructor taks an object holding configuration options as argument. Arguments list below 
+        ? defs (array of strings)
+        ? plugins (object)
+        ? ecmaVersion (number)
+        ? getFile (function)
+        ? async (bool)
+        ? fetchTimeout (number)
+    A server object has following methods 
+        ? addFile(name: string, text?: string, parent?: string)
+        ? delFile(name: string)
+        ? request(doc: object, callback: fn(error, response))
+        ? flush(callback: fn())
+        ? on(eventType: string, handler: fn())
+        ? off(eventType: string, handler: fn())
+        ? addDefs(defs: object, atFront?: bool)
+        ? deleteDefs(name: string)
+        ? loadPlugin(name: string, options?: object)
+    A server object fires the following type of events (mostly useful for plugins)
+        ? reset
+        ? beforeLoad
+        ? afterLoad
+        ? preParse
+        ? postParse
+        ? preInfer
+        ? postInfer
+        ? typeAt
+        ? completion
+JSON-type-Definitions: |
+    A type definition data structure is basically a tree of objects, we can use it to specify the types of things without actually analying source code. This is useful in one of the reasons 
+        - There is no JavaScript source code, as for the built-in types
+        - The source code is too big
+        - Tern is unable to construct the correct types from the source code
+    You can find some examples of JSON type definitions in defs/ directory.
+Server-Plugins: |
+    Plugins are JavaScript programs that add extra functionality to a server.
+    Distribution has already have some plugins inside for certain purposes. Such as 
+        ? Doc Comments Plugin
+        ? String Completion Plugin
+        ? CommonJS module Plugin
+        ? Node.js Plugin
+        ? Node.js resolve Plugin
+        ? Modules Plugin
+        ? ES modules Plugin
+        ? Webpack Plugin
+        ? RequireJS Plugin
+        ? Angular.js Plugin
+        ? Third-party Plugin
+    A plugin can use several hooks to add custom behavior. Available hooks are 
+        ? infer.registerFunction(name: string, f: fn(self, args, argnodes))
+        ? tern.registerPlugin(name: string, fn(Server, options))
+        ? tern.defineQueryType(name: string, desc: object)
+Tern-Configuration: |
+    Here is an example 
+    {
+        "libs": [
+            "browser", 
+            "jquery"
+        ],
+        "loadEagerly": [
+            "importantfile.js"
+        ],
+        "plugins": {
+            "requirejs": {
+                "baseURL": "./",
+                "paths": {}
+            }
+        }
+    }
+    You might need some utilities like
+        bin/test: Runs Tern's own testsuite.
+        bin/condense: Utility for condensing source code down to a JSON-Type-Definitions.
+Inference-Engine: |
+    Context: ??
+    Analysis: ??
+    Types: ??
+    AbstractValues: ??
+    Constraints: ??
+    Scopes: ??
+    Utilities: ??
+

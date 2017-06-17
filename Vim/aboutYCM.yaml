@@ -1,1 +1,71 @@
 # see https://github.com/Valloric/YouCompleteMe
+
+Commands: |
+    YCM_Server)Level: |
+        YcmRestartServer: 重啟server
+        YcmForceCompileAndDiagnostics: 重新compile以提供最新的diagnostics(畫面會Block)
+        YcmDiags: ???
+        YcmShowDetailedDiagnostic: 顯示完整的Diagnostic Text
+        YcmDebugInfo: 列出Debug Information，可用來查看Compile Command
+        YcmToggleLogs: 只用於Debug。在新的視窗中列出Log Files
+        YcmCompleter: Gives access to a number of additional IDE-like features in YCM
+    Semantice-Series: |
+        GetType: ??
+        GetTypeImprecise: ??
+        GetParent: ??
+        GetDoc: ??
+        GetDocImprecise: ??
+    Refactoring-QuickFix: |
+        FixIt: ??
+        RefactorRename: need a name as argument.
+Subcommands: |
+    使用時必需在前面接Command，如":YcmCompleter GoToDefinition"。
+    這樣的方式可以讓Subcommand自動Route至和目前Filetype相對應的Semanticcompleter。
+    熟悉之後可以將常用的指令map至自己想要的熱鍵;
+    指令各自有支援的Filetype，這是自然產生的限制。
+    GoTo-Series: |
+        GoToInclude: ??
+        GoToDeclaration: ??
+        GoToDefinition: ??
+        GoToImprecise: ??
+        GoToReferences: ??
+        GoToImplementation: ??
+        GoToImplementationElseDeclaration: ??
+    Miscellaneous: |
+        RestartServer: ??
+        ClearCompilationFlagCache: ??
+        ReloadSolution: ??
+Functions: |
+    youcompleteme#GetErrorCount: ??
+    youcompleteme#GetWarningCount: ??
+Autocommands: |
+    YcmLocationOpened: ??
+    YcmQuickFixOpened: ??
+Options: |
+    you don't have to do anything about these value if YCM works after installation.
+Installation: |
+    主要專注在支援JavaScript和Tern，
+    YCM對於JavaScript提供的feature包括
+        ? Intelligent auto-completion
+        ? Renaming variables (by using subcommand "RefactorRename <new_name>")
+        ? Go to definition (by using subcommand "GoToDefinition")
+        ? Find references (by using subcommand "GoToReferences")
+        ? Semantic type information for identifiers (by using subcommand "GetType")
+        ? View documentation comments for identifiers (by using subcommand "GetDoc")
+        ? Management of "Tern" server instance
+    安裝步驟如下
+    - 確認Vim的版本最少是7.4.1578、並且支援Python 2/3 (可使用:version來確認)
+    - 透過Plugin-Manager安裝YCM
+    - 編譯ycm_core。需要的工具有 |
+          ? CMAKE: 用來產生makefiles。Linux可用Package-Manager安裝、Mac可用"brew install cmake"
+          ? Python: 理論上已經有了?
+      可以先創造一個資料夾、作為編譯的工作區
+          - mkdir ycm_build
+          - cd ycm_build
+      開始產生makefiles
+          - cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+    - 加入其他語言的支援，這裡要加入TypeScript和JavaScript的支援 |
+          ? run "npm install -g typescript"來使用TypeScript
+          ? switch to "YouCompleteMe/third_party/ycmd/third_party/tern_runtime" then run "npm install --production"
+    - 為了讓Tern能正常作用、提供Auto-Completion的建議，要詳細config .tern-project檔案
+
