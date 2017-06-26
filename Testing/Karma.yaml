@@ -1,0 +1,100 @@
+# https://karma-runner.github.io/1.0/index.html
+|
+Karma is a Test-Runner which can be used to do testing-related work in different testing-environments.
+Karma is essentially a tool which spawns a web server that executes source code against test code for each of the browsers connected. The results of each test against each browser are examined and displayed via the command line to the developer such that they can see which browsers and tests passed or failed.
+Installation: |
+    Using "npm install --save-dev " with following packages
+        ? karma
+        ? karma-jasmine
+        ? jasmine-core
+    then you can run karma by "./node_modules/karma/bin/karma start".
+    In order to make this easier, installing karma-cli by 
+        "npm install -g karma-cli"
+    then you can run Karma simply by "karma" from anywhere, and it will always run the Karma locally.
+    When running Karma, "karma.conf.js" will be referenced if config-file is omitted. 
+    You can specify multiple arguments when running Karma as well like "--log-level debug" or "--single-run".
+    Try "karma start --help" for more available options.
+Configuration: |
+    you can start your configuration file by "karma init <filename>", then modify it to suit your requires.
+    Config-file of Karma needs to point to a function which accepts one argument like
+        module.exports = function(config){
+            config.set({
+                basePath: '../..',
+                frameworks: ['jasmine']
+            })
+        }
+    There are several things need to notice here when you configuring "Files" by using "Pattern"
+        - Each pattern is either a simple string or an object, and files could be a Pattern or a list of patterns.
+        - Eventually, all the patterns will get resolved into files using glob, so you can use minimatch expressions.
+        - The order of patterns determines the order in which files are included in the browser.
+        - Each file in included exactly once. If multiple patterns match the same file, it's included as if it only matched the first pattern.
+        - When the Pattern is an Object, it looks like |
+          {
+              pattern: (String, mandatory)The pattern to use for matching, 
+              watched: (Boolean, default True) files need to be watched. Also need "autoWatch" to be true, 
+              included: (Boolean, default True) should the files be included in the browser using <script> tag, 
+              served: (Boolean, default True) should the files be served by Karma's webserver
+              nocache: (Boolean, default False) should the files be served from disk on each request by Karma's webserver
+          }
+    Following are all of the available configuration options
+        ? autoWatch(Boolean, default true): Enable/disable watching files and executing the tests whenever one of these files changes
+        ? autoWatchBatchDelay(Number, default 250): tells Karma how long to wait(in milliseconds) after any changes have occurred before starting the test process again.
+        ? basePath(String, default ''): |
+            The root path location that will be used to resolve all relative paths defined in "files" and "exclude". If this is a relative path, then it will be resolved to the "__dirname" of the configuration file.
+        ? browserDisconnectTimeout(Number, default 2000): ???
+        ? browserConsoleLogOptions(Object): ???
+        ? browserDisconnectTolerance(Number, default 0): ???
+        ? browserNoActivityTimeout(Number, default 10000): ???
+        ? browsers(Array, default []): ???
+        ? captureTimeout(Number, default 60000): ???
+        ? client.args(Array, default undefined): ???
+        ? client.useIframe(Boolean, default true): Run the tests inside an iFrame or a new window.
+        ? client.runInParent(Boolean, default false): Run the tests on the same window as the client, it will load the test scripts dynamically.
+        ? client.captureConsole(Boolean, default true): ???
+        ? client.clearContext(Boolean, default true): ???
+            ? colors
+            ? concurrency
+            ? crossOriginAttribute
+            ? customContextFile
+            ? customDebugFile
+            ? customClientContextFile
+            ? customHeaders
+            ? detached
+            ? exclude
+            ? failOnEmptyTestSuite
+        ? files(Array, default []): List of files/patterns to load in the browser and which files are watched and served by Karma.
+            ? forceJSONP
+            ? frameworks
+            ? listenAddress
+            ? hostname
+            ? httpsServerOptions
+            ? logLevel
+            ? loggers
+        ? middleware(Array, default []): List of names of additional middleware you want the Karma server to use.
+            ? mime
+            ? beforeMiddleware
+        ? plugins(Array, default ['karma-*']): List of plugins to load. A plugin can be a string(in which case it will be required by Karma) or an inlined plugin - Object. By default, Karma loads all sibling NPM modules which have a name starting with "karma-*"
+            ? port
+            ? processKillTimeout
+        ? preprocessors(Object, default {'**/*.coffee': ['coffee']}): |
+            A map of preprocessors to use. The idea of preprocessors here is similar to "loader" of Webpack. 
+            Preprocessors in Karma allow you to do some work with your files before they get served to the browser.
+            Some of the preprocessors can also be configured, check the document of each installed plugin.
+            If a file matches only one key in the config object, then Karma will execute the preprocessors over that file in the order they are listed in the corresponding array;
+            If a file matches multiple keys(can be resolved by more than one key), Karma will do its best to execute the preprocessors in a reasonable order.
+            ? protocol
+            ? httpModule
+            ? proxies
+            ? proxyValidateSSL
+            ? reportSlowerThan
+            ? reporters
+            ? formatError
+            ? restartOnFileChange
+            ? retryLimit
+            ? singleRun
+            ? transports
+            ? proxyReq
+            ? proxyRes
+            ? upstreamProxy
+            ? urlRoot
+            ? jsVersion
