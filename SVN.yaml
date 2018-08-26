@@ -1,0 +1,40 @@
+---
+References: 
+  ? https://blog.longwin.com.tw/2007/07/svn_tutorial_2007/
+  ? https://blog.csdn.net/q199109106q/article/details/8655204
+  ? https://www.tutorialspoint.com/svn
+
+Concept and Principles: 
+  ? it is categorized as Centralized-Version-Control-System
+  ? different branches will have different directory path both in local and repository
+
+Setting up account: try using "--username=xxx --password=xxx" in checkout command
+
+Startup a project: 
+  import files from local folder to remote: svn import "[local directory]" "[url]"
+  checkout(co) existed project from remote to current directory: svn co "[url]"
+
+Configuration: 
+Branching: 
+  check the path, revision number, last modified date, etc: svn info
+  check the status(st) of working-copy: svn st
+  check the differences between two revisions: svn diff -r "[revision#1]" "[revision#2]"
+  show commit logs: svn log
+  creating a branch based on another: svn copy "[base url]" "[branch url]" -m "[initial comment]"
+  setting a specific revision a Tag: svn copy "[url]" "[tag url]" -m "[Tag comment]"
+  merge another branch into current: svn merge "[branch url]"
+  resolve conflicted file: svn resolve --accept=working "[file]"
+  
+(C)reate: 
+  add a file/directory into version control: svn add "[file/directory]"
+(R)etrieve: 
+  list(ls) files already under version control: svn ls "[url/path]"
+(U)pdate: 
+  update(up) to the latest version: svn up
+  commit(ci) local changes to remote: svn ci -m "[commit log]"
+  revert local changes: svn revert "[file/directory]"
+  similar to revert, reverse merging can specifiy two revisions: svn merge -r "[revision to be droped]":"[revision to overwrite]" "[file]"
+(D)elete: 
+  rename existed file and keep its history: svn mv "[original name]" "[rename to]"
+
+...

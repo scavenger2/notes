@@ -5,6 +5,14 @@ Why_Bundler: |
     Module bundler for modern JavaScript applications will recursively builds a dependency graph that includes 
     every module the application needs, then packages all of those modules into a small number of bundles.
     Here the term "module" is not restricted to JavaScript-block but any type of assets your application needs.
+    After bundled, Webpack will inject some code into the output file for its work. It has two parts briefly
+    1. Runtime: It's basically all the code webpack needs to connect your modularized application while it's running in the browser. 
+       It contains the loading and resolving logic needed to connect your modules as they interact.
+    2. Manifest: As the compiler enters, resolves, and maps out your application, it keeps detailed notes on all your modules. 
+       This collection of data is called the "Manifest" and it's what the runtime will use to resolve and load modules once they've 
+       been bundled and shipped to the browser. 
+    Content here is necessary when improving the performance of your application, it could maximum the usage of browser-caching.
+ 
 How_Does_Webpack_Work: |
     Basically, the journey starts from the entry point you defined in configuration file.
     Webpack scans all your required/imported/used asset to build "dependency graph" of application, 

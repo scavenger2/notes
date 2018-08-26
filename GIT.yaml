@@ -1,0 +1,83 @@
+---
+References: 
+    ? https://services.github.com/on-demand/downloads/zh_CN/github-git-cheat-sheet/
+    ? https://learngitbranching.js.org
+
+Concept and Principles: 
+    ? all commited history will keep in all cases
+    ? all Branches are at same level (including Trunk) as a portion of entire commit history
+    ? you are at a specific branch in any time, make sure you know which branch you are at before operations
+    ? "HEAD" is a reference points to the commit you are currently at, can point to another commit if necessary
+    ? relocating "HEAD" usually used when undo/overwrite commits of Branch
+    ? references like "HEAD" or "Branch Name" can have operators like "~[num]" points the prior commits of distance, "^" equals to "~1" when the reference has only one parent, try "^[num]" for specifiying different parent when having multiple parents.
+
+Setting up account: 
+    name: git config --global user.name "[name]"
+    mail: git config --global user.email "[email address]"
+
+Startup a project: 
+    from local folder: 
+        initial repo which does't exist in upstream: git init "[project-name]"
+    from upstream: 
+        download existed project: git clone "[url]"
+
+Configuration: 
+    ignore files/path: |
+        adding a file "xxx.gitignore" which has content like below
+            '*.log'
+            'build/'
+            'temp-*'
+        to prevent specific files get into version-control
+    list all ignored files: git ls-files --others --ignored --exclude-standard
+
+Branching: 
+    list local branches: git branch
+    create a new branch: git branch "[branch name]" "[commit to kick-off]"
+    create a new branch then checkout to it: git checkout -b "[branch name]"
+    switch to existing branch: git checkout "[branch name]"
+    setting certain commit a tag: git tag "[tag name]" "[commit id]"
+    check how far from the latest tag: git describe "[branch name]"
+    relocating Branch reference to specific commit: git branch -f "[branch name]" "[commit id]"
+    merge existing branch into HEAD: git merge "[branch name]"
+    delete branch: git branch -d "[branch name]"
+    duplicate commits of one branch then append them to another branch: git rebase "[target branch]" "[branch to duplicate]"
+    duplicate specified commits then append them to HEAD: git cherry-pick "[commit ids]"
+    rearrange commits and forms new history: git rebase -i "[ref to diverge commit]"
+
+(C)reate: 
+    put file into version control: git add "[file]"
+    take a snapshot into local history: git commit -m "[descriptive message]"
+    create a remote repo of current branch: git remote add "[repo name]" "[remote url]"
+    upload commits of current branch to remote repo: git push "[remote]" "[branch]"
+
+(R)etrieve: 
+    list all new/changed files: git status
+    show changes of specific commit: git show "[commit id]"
+    show differences: git diff
+    show differences between branches: git diff "[first branch]" "[second branch]"
+    show history of current branch: git log
+    show history of specific file on current branch: git log --follow "[file]"
+
+(U)pdate: 
+    relocating HEAD of current branch: git checkout "[commit id]"
+    switch HEAD to specific commit but keep all changes for future commit: git reset "[commit id]"
+    switch HEAD to specific commit and drop all changes: git reset --hard "[commit id]"
+    create new commit for undo then append to HEAD: git revert "[ref for undo]"
+    download history of remote repo without merging: git fetch "[remote]"
+    download history of remote repo then merge to current branch: git pull "[remote]"
+
+(D)elete: 
+    delete physical file: git rm "[file name]"
+    delete version control file of a file: git rm --cached "[file name]"
+    rename file: git mv "[original file name]" "[renamed to]"
+
+Stash: 
+    - | 
+        "Stash"  is a state contains all local changes that not yet ready for commiting
+    - operations: 
+        store local changes into stash: git stash
+        restore all stashed files: git stash pop
+        list all stashed changes: git stash list
+        drop all stashed changes: git stash drop
+
+...
