@@ -20,6 +20,7 @@ Startup a project:
         initial repo which does't exist in upstream: git init "[project-name]"
     from upstream: 
         download existed project: git clone "[url]"
+        download existed project into customized directory name: git clone "[url]" "[directory]"
 
 Configuration: 
     ignore files/path: |
@@ -31,6 +32,7 @@ Configuration:
     list all ignored files: git ls-files --others --ignored --exclude-standard
 
 Branching: 
+    check remote repo clone currently: git remote show origin
     list local branches: git branch
     create a new branch: git branch "[branch name]" "[commit to kick-off]"
     create a new branch then checkout to it: git checkout -b "[branch name]"
