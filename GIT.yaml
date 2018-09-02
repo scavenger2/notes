@@ -21,6 +21,8 @@ Startup a project:
     from upstream: 
         download existed project: git clone "[url]"
         download existed project into customized directory name: git clone "[url]" "[directory]"
+        download all branches then checkout one: git clone -b "[branch-name]" "[url]"
+        download a specific branch: git clone --single-branch -b "[branch-name]" "[url]"
 
 Configuration: 
     ignore files/path: |
