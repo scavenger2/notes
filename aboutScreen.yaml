@@ -1,0 +1,35 @@
+---
+basic principle: all command start with "Ctrl + a", then single uppercase character followed for different purpose
+split: 
+    'S' for spliting horizontally
+    '|' for spliting vertically
+    'X' for closing current region
+    'Q' for un-split, quit all splitted regions except focused one
+    'tab' for switching between regions
+    'A' for renaming current region
+
+terminal: 
+    'c' for creating a new session, this should be done after region creation
+    'C' for cleaning all current concept
+    'n' for switching to next terminal
+    'p' for switching to previous terminal
+    '[n]' for swithcing to N'th terminal
+    ※ switching terminals will NOT switch focused region
+    '"' for listing all opened terminals
+
+attach/detach: 
+    'd' for closing Screen and put it into background
+    when detached & in shell: 
+        add arguments after '-' for different functionalities
+        'ls' for listing all detached Screens, you can find Screen-Ids and Names here
+        'r [id]' for resuming specified Screen
+        'S [name]' for starting a named Session for Screen
+
+utilities: 
+    '?' for quering hot-keys
+    'H' for toggling log-file of current region
+    't' for showing system-time
+    'v' for showing version
+    'i' for showing information of Screen
+
+...
